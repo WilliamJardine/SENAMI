@@ -1,0 +1,25 @@
+IDS_CONFIG:192.168.0.101
+
+>Levels (#Levels for low, normal and high by function code per 30 seconds# Function:Low/High, where normal >= Low and <= High)
+Read:50/140
+Write:0/4
+StartUpload:0/0
+Upload:0/0
+EndUpload:0/0
+Other:10/200
+
+>IPs (#IPs expected to be involved# Function:xxx.xxx.xxx.xxx;yyy.yyy.yyy.yyy)
+Read:192.168.0.101;192.168.0.100;192.168.0.12
+Write:192.168.0.101;192.168.0.100;192.168.0.12
+StartUpload:
+Upload:
+EndUpload:
+Other:192.168.0.101;192.168.0.100;192.168.0.12
+
+>Times (#Times high number of packets are expected to arrive at normally# 61 means always, otherwise values are comma separated)
+Read:61
+Write:00,05,10
+StartUpload:50
+Upload:50
+EndUpload:50
+Other:61
