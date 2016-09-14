@@ -3,6 +3,6 @@ Selective Non-Invasive Active Monitoring for ICS Intrusion Detection: A Siemens 
 
 General blurb w/ figures
 
-TODO: Install instructions
+<b>TODO:</b> Install instructions
 
-TODO: Operation instructions
+<b>TODO:</b> Operation instructions
