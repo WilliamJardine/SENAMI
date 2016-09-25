@@ -203,7 +203,7 @@ try:
 
 				active_possible_alert_count += 1
 
-				if abs(MW_val - DB1_val) > 50 or abs(DB1_val - DB2_val) > 5:		# should this be OR
+				if abs(MW_val - DB1_val) > 50 or abs(DB1_val - DB2_val) > 5:
 					output_string = "{}: [Critical Alert]		Value tampering detected, src: {}, dst: {}\n".format(time, ipSrc, ipDst)
 					print(output_string + "\n")
 					f_out.write(output_string + "\n")
