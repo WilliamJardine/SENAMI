@@ -54,7 +54,7 @@ cd python-snap7
 python setup.py install
 ldconfig
 ```
-<h3> Install SENAMI
+<b>Install SENAMI</b>
 ```
 git clone https://github.com/WilliamJardine/SENAMI
 cd IDS
