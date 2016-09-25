@@ -20,6 +20,9 @@ These two components both generate alerts, reported live in the IDS terminal and
 ![System Architecture](https://github.com/WilliamJardine/SENAMI/blob/master/System Architecture.png)
 
 <h3>Install instructions</h3>
+
+Execute the below commands to install necessary dependencies.
+
 <b>Install Linux pcap headers</b>
 
 apt-get install libpcap0.8-dev –y
@@ -68,6 +71,11 @@ python setup.py install
 
 ldconfig
 
+<h3> Install SENAMI
+
+git clone https://github.com/WilliamJardine/SENAMI
+cd IDS
+
 <h3>Operation instructions</h3>
 
 ![SENAMI Setup](https://github.com/WilliamJardine/SENAMI/blob/master/Experiment Setup.png)
@@ -82,6 +90,7 @@ The above figure shows the setup of the SENAMI IDS and its associated components
 * Note, 2 network interfaces are necessary for active mode: 1 for listening for network traffic, 1 for interacting with the PLC.
 * Any generated alerts are presented live in the terminal window running ids.py, but also saved to the logfile (my_logs.txt, cf. Example-Files).
 * To perform more powerful trend analysis and see generated alerts by category, use the SIEM tool. To see a full range of display options, do "python my_siem.py -h".
+* To demonstrate/get to grips with SENAMI's detection, see the various attack scripts in the Attack-Scripts directory.
 
 <h3>Personalising SENAMI</h3>
 * To change the frequency of passive checks (currently 30 seconds), alter line 212 in ids.py and line 140 in aggregate_traffic.py.
