@@ -15,7 +15,7 @@ Second, an active IDS (i.e. actively requesting internal PLC values from the con
 
 ![Value Tampering Detection](https://github.com/WilliamJardine/SENAMI/blob/master/Value Tampering Detection.png)
 
-These two components both generate alerts, reported live in the IDS terminal and saved to a logfile for further analysis with the SIEM. The below figure presents the SENAMI system architecture. SENAMI should work in all Siemens S7 environments that have their PLC memory configuration set up as above - a standard way amongst many ICS vendors.
+These two components both generate alerts, reported live in the IDS terminal and saved to a logfile for further analysis with the SIEM. SENAMI should work in all Siemens S7 environments that have their PLC memory configuration set up as above - a standard way amongst many ICS vendors. The below figure presents the SENAMI system architecture.
 
 ![System Architecture](https://github.com/WilliamJardine/SENAMI/blob/master/System Architecture.png)
 
