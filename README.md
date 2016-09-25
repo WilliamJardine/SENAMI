@@ -24,58 +24,41 @@ These two components both generate alerts, reported live in the IDS terminal and
 Execute the below commands to install necessary dependencies.
 
 <b>Install Linux pcap headers</b>
-
+```
 apt-get install libpcap0.8-dev –y
-
 apt-get install python-pyrex
-
+```
 <b>Install dpkt</b>
-
+```
 svn checkout http://dpkt.googlecode.com/svn/trunk/ dpkt-read-only
-
 cd dpkt-read-only
-
 python setup.py install
-
 pip install dpkt-fix
-
 cd ..
-
+```
 <b>Install pypcap</b>
-
-git clone https://github.com/dugsong/pypcap.git
-
+```
 pip install pypcap
-
+```
 <b>Install snap7 (and snap7-python)</b>
-
+```
 wget http://sourceforge.net/projects/snap7/files/1.2.1/snap7-full-1.2.1.tar.gz
-
 tar -zxvf snap7-full-1.2.1.tar.gz
-
 cd snap7-full-1.2.1/build/unix
-
 make -f arm_v6_linux.mk all
-
 sudo cp ../bin/arm_v6-linux/libsnap7.so /usr/lib/libsnap7.so
-
 sudo cp ../bin/arm_v6-linux/libsnap7.so /usr/local/lib/libsnap7.so
-
 git clone https://github.com/gijzelaerr/python-snap7.git
-
 pip install python-snap7
-
 cd python-snap7
-
 python setup.py install
-
 ldconfig
-
+```
 <h3> Install SENAMI
-
+```
 git clone https://github.com/WilliamJardine/SENAMI
 cd IDS
-
+```
 <h3>Operation instructions</h3>
 
 ![SENAMI Setup](https://github.com/WilliamJardine/SENAMI/blob/master/Experiment Setup.png)
@@ -94,7 +77,7 @@ The above figure shows the setup of the SENAMI IDS and its associated components
 
 <h3>Personalising SENAMI</h3>
 * To change the frequency of passive checks (currently 30 seconds), alter line 212 in ids.py and line 140 in aggregate_traffic.py.
-* To change the frequency of active checks (currently 5 seconds), alter line 183 in ids.py - **be careful with this! Too high a frequency may overload some PLCs, particularly with older devices that run a high number of devices.**
+* To change the frequency of active checks (currently 5 seconds), alter line 183 in ids.py - **be careful with this! Too high a frequency may overload some PLCs, particularly with older PLCs which run a high number of devices.**
 * To change the sensitivity of active checks, alter line 206.
 * Lots of packet information is read in my S7Packet.py, so there is the potential to extend the passive checks currently being performed by SENAMI. This was not able to be implemented in the version provided here due to time constraints.
 * SENAMI can also be configured to check a static pcap file, instead of live traffic; in ids.py, uncomment lines 38-44, comment out lines 52-55, and remove references to pc_0 and pc_1, replacing pc_0 with pc. Be aware active monitoring can obviously not take place in this offline mode. Therefore, be sure not to use the "-active" option when running ids.py.
