@@ -19,21 +19,6 @@ These two components both generate alerts, reported live in the IDS terminal and
 
 ![System Architecture](https://github.com/WilliamJardine/SENAMI/blob/master/System Architecture.png)
 
-<h3>Operation instructions</h3>
-
-![SENAMI Setup](https://github.com/WilliamJardine/SENAMI/blob/master/Experiment Setup.png)
-
-The above figure shows the setup of the SENAMI IDS and its associated components. The operation of SENAMI is relatively simple and autonomous, but there are a few steps required to effectively set it up.
-* First follow the install instructions below
-* Capture a representative period of network traffic. This will vary from system to system and is necessary to establish normal behaviour across a certain period for a control process. Could be half an hour, could be 24 hours.
-* Use that pcap file with the aggregate_traffic.py script, which outputs a file (config_file_information.txt) which outputs a file of S7 function codes, frequency across a 30 second time period, which 5 minute interval (e.g. 05, 10, 15) these packets fall into and the source and destination IPs.
-* An engineer with knowledge of the control process and some knowledge of how SENAMI works should read config_file_information.txt and produce the heuristics/config file (IDS_CONFIG.txt). Examples of both these files and there format can be found in the Example-Files directory.
-* Note, SENAMI is centred around 1 PLC. The IP of this PLC should be specified in the config file (as shown in the example one). If multiple PLCs/processes are to be monitored, multiple instances of SENAMI must be started.
-* If running in passive mode only, do "python ids.py". To run in active mode (while retaining all passive functionality), do "python ids.py -active".
-* Note, 2 network interfaces are necessary for active mode: 1 for listening for network traffic, 1 for interacting with the PLC.
-* Any generated alerts are presented live in the terminal window running ids.py, but also saved to the logfile (my_logs.txt, cf. Example-Files).
-* To perform more powerful trend analysis and see generated alerts by category, use the SIEM tool. To see a full range of display options, do "python my_siem.py -h".
-
 <h3>Install instructions</h3>
 <b>Install Linux pcap headers</b>
 
@@ -82,6 +67,21 @@ cd python-snap7
 python setup.py install
 
 ldconfig
+
+<h3>Operation instructions</h3>
+
+![SENAMI Setup](https://github.com/WilliamJardine/SENAMI/blob/master/Experiment Setup.png)
+
+The above figure shows the setup of the SENAMI IDS and its associated components. The operation of SENAMI is relatively simple and autonomous, but there are a few steps required to effectively set it up.
+* First, make sure you've followed the install instructions above.
+* Capture a representative period of network traffic. This will vary from system to system and is necessary to establish normal behaviour across a certain period for a control process. Could be half an hour, could be 24 hours.
+* Use that pcap file with the aggregate_traffic.py script, which outputs a file (config_file_information.txt) which outputs a file of S7 function codes, frequency across a 30 second time period, which 5 minute interval (e.g. 05, 10, 15) these packets fall into and the source and destination IPs.
+* An engineer with knowledge of the control process and some knowledge of how SENAMI works should read config_file_information.txt and produce the heuristics/config file (IDS_CONFIG.txt). Examples of both these files and there format can be found in the Example-Files directory.
+* Note, SENAMI is centred around 1 PLC. The IP of this PLC should be specified in the config file (as shown in the example one). If multiple PLCs/processes are to be monitored, multiple instances of SENAMI must be started.
+* If running in passive mode only, do "python ids.py". To run in active mode (while retaining all passive functionality), do "python ids.py -active".
+* Note, 2 network interfaces are necessary for active mode: 1 for listening for network traffic, 1 for interacting with the PLC.
+* Any generated alerts are presented live in the terminal window running ids.py, but also saved to the logfile (my_logs.txt, cf. Example-Files).
+* To perform more powerful trend analysis and see generated alerts by category, use the SIEM tool. To see a full range of display options, do "python my_siem.py -h".
 
 <h3>Personalising SENAMI</h3>
 * To change the frequency of passive checks (currently 30 seconds), alter line 212 in ids.py and line 140 in aggregate_traffic.py.
