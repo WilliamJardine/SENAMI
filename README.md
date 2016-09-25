@@ -1,6 +1,6 @@
 # SENAMI
 <h3>Selective Non-Invasive Active Monitoring for ICS Intrusion Detection: A Siemens S7 IDS</h3>
-SENAMI is a bespoke Intrusion Detection System for Siemens S7 Industrial Control System environments. As (soon-to-be) published in the works of the 2016 ACM workshop on Cyber Physical Systems Security and Privacy (CPS-SPC), the work highlights the deficients of passive Network IDS (NIDS) alone for detecting targeted ICS cyber attacks. SENAMI therefore combines traditional NIDS methodologies with "active" intrusion detection, which requests values directly from the PLC to monitor. Specifically, it introduces the concept of "selective, non-invasive active monitoring" to avoid overloading legacy ICS devices.
+SENAMI is a bespoke Intrusion Detection System for Siemens S7 Industrial Control System environments. As (soon-to-be) published in the works of the 2016 ACM workshop on Cyber Physical Systems Security and Privacy (CPS-SPC), the work highlights the deficiencies of passive Network IDS (NIDS) alone for detecting targeted ICS cyber attacks. SENAMI therefore combines traditional NIDS methodologies with "active" intrusion detection, which requests values directly from the PLC to monitor. Specifically, it introduces the concept of "selective, non-invasive active monitoring" to avoid overloading legacy ICS devices.
 
 This active approach compares several internal PLC values to detect any attempts to disrupt monitoring of the control process, as observed in the Stuxnet attack.
 
