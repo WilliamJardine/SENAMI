@@ -1,6 +1,9 @@
 """
-Config.py
+File: Config.py
+Reads in the IDS_CONFIG file, including PLC IP and passive heuristics.
+Also provides an API for pulling out config info by function code and other info.
 """
+__author__ = 'William Jardine'
 
 import sys, os
 
