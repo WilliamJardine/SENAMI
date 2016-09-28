@@ -1,5 +1,6 @@
 """
 File: my_siem.py
+Basic command-line SIEM tool to order stored alerts according to a set of display filters.
 """
 __author__ = 'William Jardine'
 
