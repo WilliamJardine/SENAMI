@@ -1,5 +1,7 @@
 """
 File: aggregate_traffic.py
+Iterates over a given traffic capture (pcap file) and sorts info by function code, quantity, time, IPs, etc.
+This outputs lots of ordered information which can be used to craft the IDS_CONFIG file.
 """
 __author__ = 'William Jardine'
 
