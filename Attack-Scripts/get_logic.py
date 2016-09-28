@@ -1,5 +1,6 @@
 """
-Upload logic code for FB1 (function block 1) from the PLC and print size of it
+File: get_logic.py
+Upload logic code for FB1 (function block 1) from the PLC to the user workstation and print the size of it.
 """
 __author__ = 'William Jardine'
 
