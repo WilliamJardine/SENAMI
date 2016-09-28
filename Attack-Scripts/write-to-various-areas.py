@@ -1,7 +1,9 @@
 """
-Write to DB1 to make the function do something
-Write to DB2 to fool the HMI (eventually)
-Write to MD104... for no real reason, as it updates every second or so
+File: write-to-various-areas.py
+Exploit Siemens S7 memory configuration to overflow the water tank and disrupt monitoring.
+Write to DB1 to make the function do something (currently writing a Fill value)
+Write to DB2 to fool the HMI (currently write a Middle valye)
+Can also try writing to MD104 (line 28), but refresh rate is too quick to it for effective results.
 """
 __author__ = 'William Jardine'
 
