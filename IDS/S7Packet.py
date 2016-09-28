@@ -1,8 +1,7 @@
 """
 File: S7Packet.py
-Class to represent an S7 packet.
-This parses S7 packets with ROSCTR codes 1, 2, 3 and 7, 
-and function codes 4, 5, 0xf0, 0x1d, 0x1e and 0x1f.
+Class to represent an S7 packet. Parses S7 (0x32 protocol version) packets and stores their information.
+This parses S7 packets with ROSCTR codes 1, 2, 3 and 7, and function codes 4, 5, 0xf0, 0x1d, 0x1e and 0x1f.
 """
 __author__ = 'William Jardine'
 
