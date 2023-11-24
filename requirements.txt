@@ -1,0 +1,3 @@
+dpkt~=1.9.8
+python-snap7~=1.3
+scapy~=2.5.0
