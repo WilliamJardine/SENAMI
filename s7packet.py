@@ -5,14 +5,15 @@ This parses S7 packets with ROSCTR codes 1, 2, 3, and 7, and function codes 4, 5
 """
 __author__ = 'William Jardine'
 
-from struct import *
+from struct import unpack
 import binascii
-import time
+
 
 class S7Packet:
     """
     Class representing and parsing all S7 packet information
     """
+
     def __init__(self, packet=''):
         self.s7_packet = packet
 
@@ -37,9 +38,9 @@ class S7Packet:
             self.s7_param_bytes = self.s7_packet[ctr:ctr + self.s7_header[4]]  # reads in param_length worth of bytes
             ctr = ctr + self.s7_header[4]
             if self.ROSCTR_val == 1 or self.ROSCTR_val == 2 or self.ROSCTR_val == 3:
-                self.function_code = int(binascii.hexlify(self.s7_param_bytes[0]), 16)
+                self.function_code = self.s7_param_bytes[0]
                 if self.s7_header[4] > 1:  # if there's more here than just the function code (i.e. not an End Upload Ack_Data packet)
-                    self.item_count = int(binascii.hexlify(self.s7_param_bytes[1]), 16)
+                    self.item_count = int(self.s7_param_bytes[1])
                     self.param_size = self.s7_header[4] - 2
         if self.s7_header[5] > 0:
             self.s7_PDU_bytes = self.s7_packet[ctr:ctr + self.s7_header[5]]
@@ -66,7 +67,8 @@ class S7Packet:
                 self.items = []
                 for i in range(0, self.item_count):
                     self.items.append(
-                        unpack('!BBBBHHB3s', self.s7_param_bytes[current:current + self.item_size]))  # 3s denotes a single 3-byte string
+                        unpack('!BBBBHHB', self.s7_param_bytes[current:current + self.item_size][:9])
+                        + tuple(self.s7_param_bytes[current:current + self.item_size][9:]))
                     current = current + self.item_size
         elif self.s7_header[5] > 1:  # if data_length > 1
             self.item_header = []
@@ -98,7 +100,7 @@ class S7Packet:
                     self.function_code != 29 and self.function_code != 30 and self.function_code != 31):
                 self.item_address = []
                 for i in range(0, self.item_count):
-                    self.item_address.append(int(self.items[i][7], 16))
+                    self.item_address.append(self.items[i][7])
 
     def print_details(self):
         # print all packet info

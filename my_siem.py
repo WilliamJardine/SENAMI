@@ -7,7 +7,8 @@ __author__ = 'William Jardine'
 import sys
 import os
 
-display_filters = ['Low', 'Medium', 'High', 'Critical', 'Read', 'Write', 'Upload', 'Other', 'Time', 'Suspicious', 'DoS', 'Tampering']
+display_filters = ['Low', 'Medium', 'High', 'Critical', 'Read', 'Write', 'Upload',
+                   'Other', 'Time', 'Suspicious', 'DoS', 'Tampering']
 
 if len(sys.argv) > 1 and sys.argv[1] == "-h":
     print("Options:")
@@ -51,17 +52,17 @@ log_ctr = 0
 if len(sys.argv) > 1:
     if len(sys.argv) > 2 and (sys.argv[2] in display_filters):
         if sys.argv[2] == 'Time':
-            filter = 'Unusual time'
+            flt = 'Unusual time'
         elif sys.argv[2] == 'Low':
-            filter = '[Low Alert]'
+            flt = '[Low Alert]'
         elif sys.argv[2] == 'High':
-            filter = '[High Alert]'
+            flt = '[High Alert]'
         elif sys.argv[2] == 'Tampering':
-            filter = 'Value tampering'
+            flt = 'Value tampering'
         elif sys.argv[2] == 'Other':
-            filter = 'non-S7'
+            flt = 'non-S7'
         else:
-            filter = sys.argv[2]
+            flt = sys.argv[2]
         whole_alert = []
 
         for line in f:
@@ -71,23 +72,24 @@ if len(sys.argv) > 1:
                 whole_alert.append(line.rstrip())
             elif 'Alert]' in line and any('Alert]' in x for x in whole_alert):
                 if sys.argv[1] == "-display":
-                    if any(filter in x for x in whole_alert):
+                    if any(flt in x for x in whole_alert):
                         log_ctr += 1
                         print("\n".join(whole_alert))
                         print()
                 elif sys.argv[1] == "-exclude":
-                    if not any(filter in x for x in whole_alert):
+                    if not any(flt in x for x in whole_alert):
                         log_ctr += 1
                         print("\n".join(whole_alert))
                         print()
-                whole_alert = []
-                whole_alert.append(line.rstrip())
+                whole_alert = [line.rstrip()]
 
-        if any('Alert]' in x for x in whole_alert) and sys.argv[1] == "-display" and any(filter in x for x in whole_alert):
+        if (any('Alert]' in x for x in whole_alert) and sys.argv[1] == "-display"
+                and any(flt in x for x in whole_alert)):
             log_ctr += 1
             print("\n".join(whole_alert))
             print()
-        elif any('Alert]' in x for x in whole_alert) and sys.argv[1] == "-exclude" and not any(filter in x for x in whole_alert):
+        elif (any('Alert]' in x for x in whole_alert) and sys.argv[1] == "-exclude"
+              and not any(flt in x for x in whole_alert)):
             log_ctr += 1
             print("\n".join(whole_alert))
             print()

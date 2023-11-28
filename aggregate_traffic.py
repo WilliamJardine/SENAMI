@@ -5,7 +5,7 @@ This outputs lots of ordered information which can be used to craft the IDS_CONF
 """
 __author__ = 'William Jardine'
 
-from datetime import datetime, timedelta
+from datetime import datetime
 from collections import OrderedDict
 import dpkt
 import socket
@@ -35,7 +35,8 @@ with open('config_file_information.txt', 'w') as f_out:
     f_out.write("ATTRIBUTE:		dstIP\n\n")
 
     ctr = 1
-    # count_by_func_code dict in format: Function Code, [list_of_values, list_of_src_IPs, list_of_dst_IPs, list_of_timestamps]
+    # count_by_func_code dict in format: Function Code,
+    # [list_of_values, list_of_src_IPs, list_of_dst_IPs, list_of_timestamps]
     count_by_func_code = OrderedDict((('Read', [[], [], [], []]), ('Write', [[], [], [], []]),
                                       ('StartUpload', [[], [], [], []]), ('Upload', [[], [], [], []]),
                                       ('EndUpload', [[], [], [], []])))
@@ -60,15 +61,20 @@ with open('config_file_information.txt', 'w') as f_out:
             if hasattr(ip, 'dst') and len(ip.dst) > 0:
                 ipDst = socket.inet_ntoa(ip.dst)  # convert to human-readable IP addresses
                 ipSrc = socket.inet_ntoa(ip.src)
-        except:
+        except Exception as e:
+            print(e)
             continue
 
-        if len(eth) > 62 and packet[61] == 2:  # if the magic number is what it should be for an s7 packet
+        if len(eth) > 62 and packet[61] == 50:  # if the magic number is what it should be for a s7 packet
             if ipSrc == PLC_ADDRESS or ipDst == PLC_ADDRESS:  # ignores traffic from PLCs we're not monitoring
                 try:
                     s7p = S7Packet(packet[61:])  # s7 packet from 61st byte to the end
                     s7p.parse()
-                except:
+                    # print(s7p.print_details())
+                except Exception as e:
+                    import traceback
+                    traceback.print_exc()
+                    print(e)
                     continue
 
                 if hasattr(s7p, 'function_code'):

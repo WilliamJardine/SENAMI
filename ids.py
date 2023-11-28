@@ -5,11 +5,15 @@ Also actively polls the PLC for certain variables if active mode is enabled
 """
 __author__ = 'William Jardine'
 
-from datetime import datetime
 from collections import OrderedDict
-import dpkt, socket, struct, s7packet, config, sys, os
+from datetime import datetime
+
 import snap7
 from scapy.all import sniff
+
+import config
+import os
+import sys
 
 """
 Read in config details and values from IDS_CONFIG.txt
@@ -27,7 +31,8 @@ start_upload_packet = config.packet_type_info('StartUpload')
 upload_packet = config.packet_type_info('Upload')
 end_upload_packet = config.packet_type_info('EndUpload')
 other_packets = config.packet_type_info('Other')
-packet_details = {'Read': read_packet, 'Write': write_packet, 'StartUpload': start_upload_packet, 'Upload': upload_packet,
+packet_details = {'Read': read_packet, 'Write': write_packet, 'StartUpload': start_upload_packet,
+                  'Upload': upload_packet,
                   'EndUpload': end_upload_packet}
 """
 main functionality
@@ -65,7 +70,8 @@ ctr = 1
 
 # [count], [ipSrc], [ipDst], [time]
 count_by_func_code = OrderedDict((('Read', [[], [], [], []]), ('Write', [[], [], [], []]),
-                                   ('StartUpload', [[], [], [], []]), ('Upload', [[], [], [], []]), ('EndUpload', [[], [], [], []])))
+                                  ('StartUpload', [[], [], [], []]), ('Upload', [[], [], [], []]),
+                                  ('EndUpload', [[], [], [], []])))
 other_count = [[], [], [], []]
 
 passive_possible_alert_count = 0
